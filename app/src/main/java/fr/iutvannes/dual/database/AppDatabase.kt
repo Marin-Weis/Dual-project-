@@ -15,4 +15,5 @@ abstract class AppDatabase {
     abstract fun eleveDao() : EleveDAO
     abstract fun profDao() : ProfDAO
     abstract fun resultatDao() : ResultatDAO
+    abstract fun seanceDao() : SeanceDAO
 }
