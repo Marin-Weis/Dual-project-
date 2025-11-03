@@ -1,5 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.Dual" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- Thème principal de l'application utilisant vos couleurs -->
+    <style name="Theme.BiathlonApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Couleur primaire (utilisée pour la barre d'action, les boutons, etc.) -->
+        <item name="colorPrimary">@color/bleu</item>
+        <!-- Variante plus foncée de la couleur primaire (utilisée pour la barre de statut) -->
+        <item name="colorPrimaryVariant">@color/bleu_fonce</item>
+        <!-- Couleur du texte et des icônes SUR la couleur primaire -->
+        <item name="colorOnPrimary">@color/blanc</item>
+
+        <!-- Couleur secondaire (utilisée pour les accents, les contrôles flottants, etc.) -->
+        <item name="colorSecondary">@color/bleu</item>
+        <item name="colorSecondaryVariant">@color/bleu_fonce</item>
+        <item name="colorOnSecondary">@color/blanc</item>
+
+        <!-- Couleur de la barre de statut -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <!-- Vos styles de texte existants (on n'y touche pas) -->
+    <style name="DefaultTextStyle">
+        <item name="android:textColor">@color/gris</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/kanit</item>
+    </style>
+
+    <style name="SubtitleTextStyle" parent="DefaultTextStyle">
+        <item name="android:textColor">@color/noir</item>
+    </style>
+
+    <style name="TitleTextStyle" parent="SubtitleTextStyle">
+        <item name="android:textSize">24sp</item>
+    </style>
+
 </resources>

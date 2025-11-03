@@ -1,4 +1,4 @@
-package fr.iutvannes.dual.database
+package fr.iutvannes.dual.model.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Dual</string>
+
+    <!-- Page d'accueil -->
+    <string name="home_page_title">Dual</string>
+
+    <!-- Page de connexion -->
+    <string name="connexion_page_title">Connexion</string>
+
+    <!-- Page de creation -->
+    <string name="creation_page_title">Creation</string>
 </resources>

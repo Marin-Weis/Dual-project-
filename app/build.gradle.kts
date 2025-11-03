@@ -1,13 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
     id("org.jetbrains.kotlin.kapt")
 }
 
 android {
     namespace = "fr.iutvannes.dual"
-    compileSdk = 36
+    compileSdk =36
 
     defaultConfig {
         applicationId = "fr.iutvannes.dual"
@@ -38,8 +37,10 @@ android {
         jvmTarget = "11"
     }
 
+    // On peut retirer le bloc buildFeatures { compose = false }
+    // car c'est la valeur par défaut. Je le laisse pour la clarté.
     buildFeatures {
-        compose = true
+        compose = false
     }
 
     packaging {
@@ -52,21 +53,20 @@ android {
 }
 
 dependencies {
+    // --- Dépendances de base pour une application non-Compose ---
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
-    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.appcompat) // Essentiel pour les thèmes (comme AppCompatActivity)
+
+    // --- AJOUT NÉCESSAIRE ---
+    // C'est cette ligne qui ajoute Theme.MaterialComponents...
+    implementation("com.google.android.material:material:1.11.0")
+
+    // --- Dépendances pour les tests ---
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
+
+    // --- VOS DÉPENDANCES CONSERVÉES ---
 
     // --- ROOM (Base de données SQLite) ---
     implementation("androidx.room:room-runtime:2.6.1")
@@ -84,4 +84,17 @@ dependencies {
 
     // --- LOGGING (Pour le débogage serveur) ---
     implementation("ch.qos.logback:logback-classic:1.4.14")
+
+    // --- RETIRÉ : Dépendances inutiles de Jetpack Compose ---
+    // implementation(libs.androidx.lifecycle.runtime.ktx) // Souvent utilisé avec Compose, mais peut être gardé si besoin
+    // implementation(libs.androidx.activity.compose)
+    // implementation(platform(libs.androidx.compose.bom))
+    // implementation(libs.androidx.compose.ui)
+    // implementation(libs.androidx.compose.ui.graphics)
+    // implementation(libs.androidx.compose.ui.tooling.preview)
+    // implementation(libs.androidx.compose.material3)
+    // androidTestImplementation(platform(libs.androidx.compose.bom))
+    // androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+    // debugImplementation(libs.androidx.compose.ui.tooling)
+    // debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
