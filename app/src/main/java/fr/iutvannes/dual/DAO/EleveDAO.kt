@@ -9,14 +9,15 @@ interface EleveDAO {
     @Insert
     suspend fun insert(eleve: Eleve): Long
 
-    @Query("SELECT * FROM Eleve WHERE id_eleve = :idELeve")
-    suspend fun delete(idELeve: Int): Int
+    @Query("DELETE FROM Eleve WHERE id_eleve = :idEleve")
+    suspend fun delete(idEleve: Int): Int
 
-    @Query("SELECT * FROM ELeve")
+    @Query("SELECT * FROM Eleve")
     suspend fun getAll(): List<Eleve>
 
     @Query("SELECT * FROM Eleve WHERE id_eleve = :idEleve")
-    suspend fun getEleveById(idEleve: Int) : Eleve
+    suspend fun getEleveById(idEleve: Int): Eleve?
 
-    suspend fun update(eleve: Eleve) : Int
+    @Update
+    suspend fun update(eleve: Eleve): Int
 }

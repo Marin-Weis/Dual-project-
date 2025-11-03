@@ -1,3 +1,5 @@
+package fr.iutvannes.dual.DAO
+
 import androidx.room.*
 import fr.iutvannes.dual.Persistence.Resultat
 
@@ -14,7 +16,7 @@ interface ResultatDAO {
     suspend fun getAll(): List<Resultat>
 
     @Query("SELECT * FROM Resultat WHERE id_resultat = :idResultat")
-    suspend fun getResultatById(idResultat: Int): Prof?
+    suspend fun getResultatById(idResultat: Int): Resultat?
 
     @Update
     suspend fun update(resultat: Resultat): Int

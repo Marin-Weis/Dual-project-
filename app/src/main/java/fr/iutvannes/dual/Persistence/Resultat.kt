@@ -7,12 +7,12 @@ import androidx.room.*
 data class Resultat (
     @PrimaryKey(autoGenerate = true)
     var id_resultat: Int=0,
-    var id_eleve : Int,
-    var id_seance: Int,
-    var temp_course : Float,
-    var cibles_touchees: Int,
-    var penalites: Float,
-    var vma: Float,
-    var note_finale: Float,
-    var classement: Int
+    var id_eleve : Int = 0,
+    var id_seance: Int = 0,
+    var temp_course : Float = 0F,
+    var cibles_touchees: Int = 0,
+    var penalites: Float = 0F,
+    var vma: Float = 0F,
+    var note_finale: Float = 0F,
+    var classement: Int = 0
 )

@@ -1,4 +1,7 @@
+package fr.iutvannes.dual.DAO
+
 import androidx.room.*
+import fr.iutvannes.dual.Persistence.Seance
 
 @Dao
 interface SeanceDAO {

@@ -1,3 +1,5 @@
+package fr.iutvannes.dual.Persistence
+
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -5,8 +7,8 @@ import androidx.room.PrimaryKey
 data class Seance(
     @PrimaryKey(autoGenerate = true)
     var id_seance: Int = 0,
-    var date: String,
-    var nb_tours: Int,
-    var nb_cibles: Int,
-    var id_prof: String
+    var date: String = "",
+    var nb_tours: Int = 0,
+    var nb_cibles: Int = 0,
+    var id_prof: String = ""
 )

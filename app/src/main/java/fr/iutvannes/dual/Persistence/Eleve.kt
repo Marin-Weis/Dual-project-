@@ -7,8 +7,8 @@ import androidx.room.Entity
 data class Eleve(
     @PrimaryKey(autoGenerate = true)
     var id_eleve: Int = 0,
-    var nom: String,
-    var prenom: String,
-    var data_naissance : String,
-    var password : String,
+    var nom: String = "",
+    var prenom: String = "",
+    var data_naissance : String = "",
+    var password : String = "",
     )
