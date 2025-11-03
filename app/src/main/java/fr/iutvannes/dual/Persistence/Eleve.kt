@@ -1,19 +1,14 @@
 package fr.iutvannes.dual.Persistence
 
-class Eleve(var id_eleve : Int, var nom : String, var prenom : String, var classe : String, var date_naissance : String, var password : String){
+import androidx.room.PrimaryKey
+import androidx.room.Entity
 
-    fun getId() : Int = this.id_eleve
-    fun setId(value : Int) { this.id_eleve = value }
-
-    fun getName() : String = this.nom
-    fun setName(value : String) { this.nom = value }
-
-    fun getFirstName() : String = this.prenom
-    fun setFirstName(value : String) { this.prenom = value }
-
-    fun getBirthDate() : String = this.date_naissance
-    fun setBirthDate(value : String) { this.date_naissance = value }
-
-    fun getPassword() : String = this.password
-    fun setPassword(value : String) { this.password = value }
-}
+@Entity(tableName = "Eleve")
+data class Eleve(
+    @PrimaryKey(autoGenerate = true)
+    var id_eleve: Int = 0,
+    var nom: String,
+    var prenom: String,
+    var data_naissance : String,
+    var password : String,
+    )
