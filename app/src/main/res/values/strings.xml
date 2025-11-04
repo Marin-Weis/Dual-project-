@@ -3,6 +3,8 @@
 
     <!-- Page d'accueil -->
     <string name="home_page_title">Dual</string>
+    <string name="home_launch_session_button">Lancer une séance</string>
+    <string name="home_greeting">Bonjour </string>
 
     <!-- Page de connexion -->
     <string name="connexion_page_title">Connexion</string>

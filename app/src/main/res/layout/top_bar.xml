@@ -1,0 +1,56 @@
+<!-- res/layout/top_bar.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/top_bar_background_with_border"
+    android:paddingTop="@dimen/default_margin"
+    android:paddingBottom="@dimen/default_margin"
+    android:paddingStart="@dimen/default_margin"
+    android:paddingEnd="@dimen/default_margin"
+    android:gravity="center_vertical"
+    android:clipToPadding="false">
+
+    <!-- Titres (partie gauche) -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+
+        <TextView
+            android:text="@string/home_greeting"
+            android:textSize="32sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/prenomLabel"
+            android:text="Empty"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!-- Espaceur : cette vue va s'étirer pour pousser les éléments sur les côtés -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Image de profil (partie droite) -->
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="82dp"
+        android:layout_height="82dp"
+        android:src="@drawable/pfp"
+        android:background="?attr/selectableItemBackgroundBorderless" />
+
+</LinearLayout>

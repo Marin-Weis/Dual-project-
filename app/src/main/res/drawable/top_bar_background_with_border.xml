@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Couleur de fond principale -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/blanc" />
+        </shape>
+    </item>
+
+    <!-- Ligne de séparation en bas -->
+    <item android:gravity="bottom">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/noir" />
+            <size android:height="2dp" />
+        </shape>
+    </item>
+
+</layer-list>
