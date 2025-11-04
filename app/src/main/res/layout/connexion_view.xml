@@ -162,4 +162,20 @@
         app:layout_constraintTop_toBottomOf="@id/rememberMeContainer"
         android:layout_marginTop="24dp" />
 
+    <TextView
+        android:id="@+id/inscriptionLien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/connexion_page_sinscrire_button"
+        android:textSize="16sp"
+        android:textColor="@color/bleu"
+        android:fontFamily="@font/kanit_light"
+        android:textStyle="normal"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/connectionButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

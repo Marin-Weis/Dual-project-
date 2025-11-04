@@ -10,6 +10,7 @@
     <string name="connexion_page_password_input">Mot de passe :</string>
     <string name="connexion_page_remember_me_button">Se souvenir de moi</string>
     <string name="connexion_page_button">Se connecter</string>
+    <string name="connexion_page_sinscrire_button">Pas de compte ? S\'inscrire</string>
 
     <!-- Page d/'inscription' -->
     <string name="creation_page_title">Inscription</string>
@@ -17,6 +18,8 @@
     <string name="inscription_page_prenom_input">Prenom :</string>
     <string name="inscription_page_email_input">Adresse email :</string>
     <string name="inscription_page_password_input">Mot de passe :</string>
-    <string name="inscription_page_button">S\'inscrire'</string>
+    <string name="inscription_page_passwordVerif_input">Vérification du mot de passe :</string>
+    <string name="inscription_page_button">S\'inscrire</string>
+    <string name="inscription_page_seconnecter_button">Déjà un compte ? Se connecter</string>
 
 </resources>

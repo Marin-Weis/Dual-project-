@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/kanit_light"
-        android:text="@string/connexion_page_title"
+        android:text="@string/creation_page_title"
         android:textSize="40sp"
         android:textColor="@color/blanc"
         android:textStyle="bold"
@@ -33,13 +33,13 @@
         app:layout_constraintVertical_bias="0.25" />
 
     <EditText
-        android:id="@+id/Email"
+        android:id="@+id/Nom"
         android:layout_width="480dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/kanit_light"
-        android:hint="@string/connexion_page_email_input"
+        android:hint="@string/inscription_page_nom_input"
         android:importantForAutofill="no"
-        android:inputType="textEmailAddress"
+        android:inputType="text"
         android:textColor="#8D8D8D"
         android:textSize="25sp"
         android:textStyle="normal"
@@ -51,6 +51,63 @@
         app:layout_constraintVertical_bias="0.42" />
 
     <View
+        android:id="@+id/PremiereBarre"
+        android:layout_width="500dp"
+        android:layout_height="2dp"
+        android:background="#D9D9D9"
+        app:layout_constraintTop_toBottomOf="@id/Nom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/Prenom"
+        android:layout_width="480dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/kanit_light"
+        android:hint="@string/inscription_page_prenom_input"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textColor="#8D8D8D"
+        android:textSize="25sp"
+        android:textStyle="normal"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="@+id/PremiereBarre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <View
+        android:id="@+id/DeuxiemeBarre"
+        android:layout_width="500dp"
+        android:layout_height="2dp"
+        android:background="#D9D9D9"
+        app:layout_constraintTop_toBottomOf="@id/Prenom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp" />
+
+    <EditText
+        android:id="@+id/Email"
+        android:layout_width="480dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/kanit_light"
+        android:hint="@string/inscription_page_email_input"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:textColor="#8D8D8D"
+        android:textSize="25sp"
+        android:textStyle="normal"
+        android:background="@null"
+        app:layout_constraintTop_toTopOf="@id/DeuxiemeBarre"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <View
+        android:id="@+id/TroisiemeBarre"
         android:layout_width="500dp"
         android:layout_height="2dp"
         android:background="#D9D9D9"
@@ -64,16 +121,16 @@
         android:id="@+id/passwordContainer"
         android:layout_width="480dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/Email"
+        app:layout_constraintTop_toBottomOf="@id/TroisiemeBarre"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="16dp">
 
         <EditText
             android:id="@+id/passwordInput"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/connexion_page_password_input"
+            android:hint="@string/inscription_page_password_input"
             android:importantForAutofill="no"
             android:textColor="#8D8D8D"
             android:fontFamily="@font/kanit_light"
@@ -102,7 +159,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <View
-        android:id="@+id/Trait"
+        android:id="@+id/PremierTrait"
         android:layout_width="500dp"
         android:layout_height="2dp"
         android:background="#D9D9D9"
@@ -113,53 +170,85 @@
         android:layout_marginBottom="8dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/rememberMeContainer"
-        android:layout_width="wrap_content"
+        android:id="@+id/passwordVerifContainer"
+        android:layout_width="480dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/Trait"
+        app:layout_constraintTop_toBottomOf="@id/PremierTrait"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="16dp">
 
-        <!-- Case à cocher -->
-        <CheckBox
-            android:id="@+id/rememberMeCheckBox"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/passwordVerifInput"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:checked="false"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-        <!-- Texte à droite de la checkbox -->
-        <TextView
-            android:id="@+id/rememberMeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:hint="@string/inscription_page_passwordVerif_input"
+            android:importantForAutofill="no"
+            android:textColor="#8D8D8D"
             android:fontFamily="@font/kanit_light"
-            android:text="@string/connexion_page_remember_me_button"
-            android:textSize="20sp"
-            android:textColor="#000000"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/rememberMeCheckBox"
-            app:layout_constraintTop_toTopOf="@id/rememberMeCheckBox"
-            app:layout_constraintBottom_toBottomOf="@id/rememberMeCheckBox"
-            android:layout_marginStart="8dp"/>
+            android:inputType="textPassword"
+            android:background="@null"
+            android:textSize="25sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/oeilVerifIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageView
+            android:id="@+id/oeilVerifIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/oeil"
+            android:clickable="true"
+            android:focusable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="Afficher/masquer le mot de passe"
+            tools:ignore="HardcodedText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <View
+        android:id="@+id/DeuxiemeTrait"
+        android:layout_width="500dp"
+        android:layout_height="2dp"
+        android:background="#D9D9D9"
+        app:layout_constraintTop_toBottomOf="@id/passwordVerifContainer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp" />
+
     <Button
-        android:id="@+id/connectionButton"
+        android:id="@+id/inscriptionButton"
         android:layout_width="400dp"
         android:layout_height="45dp"
-        android:text="@string/connexion_page_button"
+        android:text="@string/inscription_page_button"
         android:textSize="20sp"
         android:textColor="#FFFFFF"
         android:fontFamily="@font/kanit"
         android:background="@drawable/btn_connexion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rememberMeContainer"
-        android:layout_marginTop="24dp" />
+        app:layout_constraintTop_toBottomOf="@id/DeuxiemeTrait"
+        android:layout_marginTop="48dp" />
+
+    <TextView
+        android:id="@+id/connexionLien"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/inscription_page_seconnecter_button"
+        android:textSize="16sp"
+        android:textColor="@color/bleu"
+        android:fontFamily="@font/kanit_light"
+        android:textStyle="normal"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/inscriptionButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
