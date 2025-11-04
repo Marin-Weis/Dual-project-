@@ -6,19 +6,26 @@ import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import io.ktor.server.plugins.callloging.*
-import io.ktor.server.plugins.contentnegotiation.*
-import io.ktor.server.plugins.cors.routing.*
+
+import io.ktor.server.plugins.calllogging.*
 import io.ktor.server.plugins.defaultheaders.*
+import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.plugins.compression.*
+import io.ktor.server.plugins.contentnegotiation.*
+
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 
+/**
+ * Event test eleve -> server
+ */
 @Serializable
 data class EventDTO(
     val type: String,
@@ -31,7 +38,7 @@ data class EventDTO(
  * Injecte les dépendances dans les routes
  */
 object KtorServer {
-    private var engine: ApplicationEngine? = null
+    private var engine: EmbeddedServer<*, *>? = null
     private lateinit var appContext: Context
 
     fun start(context: Context, port: Int = 8080, wait: Boolean = false) {
@@ -43,7 +50,7 @@ object KtorServer {
     }
 
     fun stop() {
-        engine?.stop(500, 1000)
+        engine?.stop()
         engine = null
     }
 }
@@ -68,7 +75,7 @@ fun Application.module(appContext: Context) {
     install(CallLogging)
     install(ContentNegotiation) { json() }
     install(CORS) {
-        anyHost()
+        anyHost() // restreins en prod
         allowHeader(HttpHeaders.ContentType)
         allowMethod(HttpMethod.Get)
         allowMethod(HttpMethod.Post)
@@ -78,9 +85,9 @@ fun Application.module(appContext: Context) {
     val liveBus = MutableSharedFlow<EventDTO>(extraBufferCapacity = 64)
 
     routing {
-
         get("/ping") { call.respond(mapOf("status" to "ok")) }
 
+        // URL à mettre dans le QR
         get("/qr-url") {
             val host = call.request.host()
             val port = call.request.port()
@@ -95,42 +102,38 @@ fun Application.module(appContext: Context) {
         }
         get("/student/{...}") {
             val rest = call.parameters.getAll("...")?.joinToString("/") ?: "index.html"
-            val assetPath = "student/$rest"
-            runCatching { appContext.assets.open(assetPath).use { it.readBytes() } }
-                .onSuccess { bytes -> call.respondBytes(bytes, contentType = contentTypeFor(assetPath)) }
-                .onFailure { call.respond(HttpStatusCode.NotFound, "Fichier introuvable: $assetPath") }
+            val p = "student/$rest"
+            runCatching { appContext.assets.open(p).use { it.readBytes() } }
+                .onSuccess { call.respondBytes(it, contentTypeFor(p)) }
+                .onFailure { call.respond(HttpStatusCode.NotFound, "Fichier introuvable: $p") }
         }
 
+        // Reçoit les événements des élèves
         post("/event") {
             val evt = runCatching { call.receive<EventDTO>() }.getOrElse {
-                call.respond(HttpStatusCode.BadRequest, mapOf("error" to "invalid_body"))
-                return@post
+                call.respond(HttpStatusCode.BadRequest, mapOf("error" to "invalid_body")); return@post
             }
             liveBus.tryEmit(evt)
             call.respond(HttpStatusCode.Accepted, mapOf("status" to "received"))
         }
 
-        // SSE manuel (sans plugin)
+        // SSE manuel on fait sans module SSE
         get("/live") {
             call.response.cacheControl(CacheControl.NoCache(null))
             call.respondTextWriter(contentType = ContentType.Text.EventStream) {
-                fun sendSse(data: String) {
-                    write("data: $data\n\n")
-                    flush()
-                }
+                fun sendSse(data: String) { write("data: $data\n\n"); flush() }
                 sendSse("""{"type":"connected","payload":{"msg":"ready"}}""")
                 liveBus.collect { evt ->
                     val payload = evt.payload ?: JsonObject(mapOf("ts" to JsonPrimitive(System.currentTimeMillis())))
-                    val studentId = evt.studentId ?: ""
-                    val json = """{"type":"${evt.type}","studentId":"$studentId","payload":$payload}"""
-                    sendSse(json)
+                    val sid = evt.studentId ?: ""
+                    sendSse("""{"type":"${evt.type}","studentId":"$sid","payload":$payload}""")
                 }
             }
         }
 
         get("/") {
             call.respondText(
-                "Serveur BIATHLON actif • Élève: /student • Prof (SSE): /live • QR: /qr-url",
+                "BIATHLON actif • Élève: /student • Prof (SSE): /live • QR: /qr-url",
                 ContentType.Text.Plain
             )
         }
