@@ -14,7 +14,8 @@
         android:src="@drawable/fond_bleu_connexion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="HardcodedText,MissingConstraints"
+        android:contentDescription="Le fond bleu de la page de connexion"/>
 
     <TextView
         android:id="@+id/titleText"
@@ -37,6 +38,8 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/kanit_light"
         android:hint="@string/connexion_page_email_input"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
         android:textColor="#8D8D8D"
         android:textSize="25sp"
         android:textStyle="normal"
@@ -71,6 +74,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="@string/connexion_page_password_input"
+            android:importantForAutofill="no"
             android:textColor="#8D8D8D"
             android:fontFamily="@font/kanit_light"
             android:inputType="textPassword"
@@ -92,7 +96,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:contentDescription="Afficher/masquer le mot de passe"/>
+            android:contentDescription="Afficher/masquer le mot de passe"
+            tools:ignore="HardcodedText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
