@@ -6,6 +6,10 @@
 
     <!-- Page de connexion -->
     <string name="connexion_page_title">Connexion</string>
+    <string name="connexion_page_email_input">Adresse email :</string>
+    <string name="connexion_page_password_input">Mot de passe :</string>
+    <string name="connexion_page_remember_me_button">Se souvenir de moi</string>
+    <string name="connexion_page_button">Se connecter</string>
 
     <!-- Page de creation -->
     <string name="creation_page_title">Creation</string>
