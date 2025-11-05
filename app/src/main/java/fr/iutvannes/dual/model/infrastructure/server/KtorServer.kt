@@ -82,6 +82,7 @@ fun Application.module(appContext: Context) {
     }
     install(Compression) { gzip() }
 
+    // bus d'évènement pour le temps réel
     val liveBus = MutableSharedFlow<EventDTO>(extraBufferCapacity = 64)
 
     routing {
