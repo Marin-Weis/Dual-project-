@@ -113,8 +113,13 @@ dependencies {
     implementation(libs.ktor.compression)
     implementation(libs.ktor.content.negotiation)
     implementation(libs.ktor.serialization.json)
+
+    // QR CODE
     implementation("com.google.zxing:core:3.5.3")
 
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.0")
 
     // logging
     implementation(libs.logback)
