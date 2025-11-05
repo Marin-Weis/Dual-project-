@@ -1,53 +1,120 @@
 package fr.iutvannes.dual
 
-import android.content.Intent              // Pour lancer une autre activité
-import android.graphics.Bitmap
-import android.os.Bundle                  // Pour la gestion du cycle de vie
-import android.widget.Button               // Pour manipuler les boutons de la vue
-import androidx.appcompat.app.AppCompatActivity  // Classe de base pour les activités modernes (compatibilité)
-import fr.iutvannes.dual.infrastructure.server.KtorServer // serveur Ktor
-import com.google.zxing.BarcodeFormat // QR code
-import com.google.zxing.qrcode.QRCodeWriter // QR code
+import android.os.Bundle
+import android.view.View // Import pour gérer la visibilité (View.VISIBLE, View.GONE)
+import android.widget.FrameLayout
+import android.widget.ImageButton
+import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
+import androidx.fragment.app.Fragment
+import fr.iutvannes.dual.controller.fragments.ClassesFragment
+import fr.iutvannes.dual.controller.fragments.ProfilFragment // Assurez-vous d'importer vos fragments
+import fr.iutvannes.dual.controller.fragments.TableauDeBordFragment
 
 class MainActivity : AppCompatActivity() {
 
+    // Vues pour la barre de navigation et son conteneur
+    private lateinit var navBarContainer: LinearLayout
+    private lateinit var navHomeButton: LinearLayout
+    private lateinit var navClassesButton: LinearLayout
+    private lateinit var topBarContainer: LinearLayout
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Code pour le plein écran...
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        val insetsController = WindowInsetsControllerCompat(window, window.decorView)
+        insetsController.hide(WindowInsetsCompat.Type.systemBars())
+        insetsController.systemBarsBehavior =
+            WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
 
-        // Lien entre le contrôleur (MainActivity) et la vue XML (activity_main.xml)
-        setContentView(R.layout.tableau_de_bord_view)
+        setContentView(R.layout.activity_main)
 
-//        // Lancer le fragment de connexion au démarrage
-//        showConnexionFragment()
-    }
+        // Listener pour le bouton de profil
+        val profileButton = findViewById<ImageButton>(R.id.profileImage)
+        profileButton.setOnClickListener {
+            showFragment(ProfilFragment())
+        }
 
-//        // 🧩 On récupère le bouton déclaré dans activity_main.xml
-//        val boutonConnexion = findViewById<Button>(R.id.boutonConnexion)
-//
-//        // 🚀 Action : quand on clique sur le bouton, on ouvre la page de connexion
-//        boutonConnexion.setOnClickListener {
-//            val intent = Intent(this, ConnexionActivity::class.java)
-//            startActivity(intent)
-//        }
-    }
+        // --- GESTION DE LA NAVIGATION ---
+
+        // Récupérer les vues globales de la barre de navigation
+        navBarContainer = findViewById(R.id.bottomNav)
+        navHomeButton = findViewById(R.id.nav_home_button)
+        navClassesButton = findViewById(R.id.nav_classes_button)
+
+        // --- GESTION DU PROFIL ---
+        topBarContainer = findViewById(R.id.topBar)
 
 
-
-    private fun genererQRCode(text: String): Bitmap {
-        val writer = QRCodeWriter()
-        val bitMatrix = writer.encode(text, BarcodeFormat.QR_CODE, 512, 512)
-        val bmp = Bitmap.createBitmap(512, 512, Bitmap.Config.RGB_565)
-        for (x in 0 until 512) {
-            for (y in 0 until 512) {
-                bmp.setPixel(x, y, if (bitMatrix[x, y]) android.graphics.Color.BLACK else android.graphics.Color.WHITE)
+        // Définir les actions des clics
+        navHomeButton.setOnClickListener {
+            if (supportFragmentManager.findFragmentById(R.id.fragment_container) !is TableauDeBordFragment) {
+                showFragment(TableauDeBordFragment())
             }
         }
-        return bmp
+        navClassesButton.setOnClickListener {
+            if (supportFragmentManager.findFragmentById(R.id.fragment_container) !is ClassesFragment) {
+                showFragment(ClassesFragment())
+            }
+        }
+
+        // --- ÉTAT INITIAL ---
+        if (savedInstanceState == null) {
+            showFragment(TableauDeBordFragment()) // On commence sur le tableau de bord
+        }
+
     }
-    // Exemple d'utilisation pour la connexion à l'app
-//    private fun showConnexionFragment() {
-//        val fragment = ConnexionFragment()  // Fragment Vue
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.fragment_container, fragment)
-//            .commit()
-//    }
+
+    /**
+     * Remplace le fragment actuel ET gère la visibilité de la barre de navigation.
+     */
+    fun showFragment(fragment: Fragment) {
+        // --- C'EST LA LOGIQUE LA PLUS IMPORTANTE ---
+        when (fragment) {
+            is TableauDeBordFragment -> {
+                // Si c'est le tableau de bord
+                topBarContainer.visibility = View.VISIBLE
+                navBarContainer.visibility = View.VISIBLE // On MONTRE la barre
+                selectNavItem(navHomeButton) // On sélectionne l'icône "Home"
+            }
+
+            is ClassesFragment -> {
+                topBarContainer.visibility = View.VISIBLE
+                navBarContainer.visibility = View.VISIBLE // On MONTRE la barre
+                selectNavItem(navClassesButton) // On sélectionne l'icône "Classe"
+            }
+
+            is ProfilFragment -> {
+                topBarContainer.visibility = View.GONE
+                navBarContainer.visibility = View.GONE
+            }
+            // Pour tout autre fragment (Connexion, Inscription...), la barre sera cachée par défaut
+            else -> {
+                navBarContainer.visibility = View.GONE
+            }
+        }
+
+        // Affiche le fragment passé en paramètre
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment) // Correction de l'ID
+            .commit()
+    }
+
+    /**
+     * Gère la sélection visuelle des boutons (change la couleur).
+     * Met les boutons à false et le bouton passé en paramètre à true afin d'éviter les problèmes de couleur.
+     * Ensuite on affiche la configuration actuelle avec itemToSelect à true (le bouton selectionner change de couleur).
+     */
+    private fun selectNavItem(itemToSelect: LinearLayout) {
+        navHomeButton.isSelected = false
+        navClassesButton.isSelected = false
+        itemToSelect.isSelected = true
+    }
+}
+
+

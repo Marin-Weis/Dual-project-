@@ -25,7 +25,7 @@ class ConnexionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.connexion_view, container, false)
+        val view = inflater.inflate(R.layout.activity_connexion, container, false)
 
         val emailInput = view.findViewById<EditText>(R.id.Email)
         val passwordInput = view.findViewById<EditText>(R.id.passwordInput)

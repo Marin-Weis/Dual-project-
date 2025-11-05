@@ -32,7 +32,7 @@
 
         <TextView
             android:id="@+id/prenomLabel"
-            android:text="Empty"
+            android:text="@string/empty"
             android:textSize="32sp"
             android:textStyle="bold"
             android:layout_width="wrap_content"
@@ -46,11 +46,12 @@
         android:layout_weight="1" />
 
     <!-- Image de profil (partie droite) -->
-    <ImageView
+    <ImageButton
         android:id="@+id/profileImage"
         android:layout_width="82dp"
         android:layout_height="82dp"
         android:src="@drawable/pfp"
+        android:scaleType="centerCrop"
         android:background="?attr/selectableItemBackgroundBorderless" />
 
 </LinearLayout>

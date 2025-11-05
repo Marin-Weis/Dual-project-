@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/boutonSeance"
+            android:layout_width="400dp"
+            android:layout_height="160dp"
+            android:text="@string/home_launch_session_button"
+            android:textSize="40sp"
+            android:textColor="@color/blanc"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_button_background">
+        </Button>
+
+    </FrameLayout>
+
+</ScrollView>

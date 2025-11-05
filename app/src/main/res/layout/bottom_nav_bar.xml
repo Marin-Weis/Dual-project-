@@ -1,28 +1,81 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/navBar"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_navigation_bar_container"
     android:orientation="horizontal"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_gravity="bottom|center_horizontal"
     android:background="@drawable/rounded_navbar_background"
-    android:padding="10dp"
     android:elevation="8dp"
+    android:paddingStart="32dp"
+    android:paddingEnd="32dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
     android:gravity="center">
 
-    <ImageButton
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/home_blue"/>
+    <!-- Bouton 1 : Home (l'ensemble est cliquable) -->
+    <LinearLayout
+        android:id="@+id/nav_home_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp">  <!-- Ajout d'un padding pour un effet de clic plus large -->
 
-    <ImageButton
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/person"/>
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/home"
+            app:tint="@color/bottom_nav_color"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:focusable="false"
+            android:contentDescription="@string/home" /> <!-- Important pour l'accessibilité -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home"
+            android:textColor="@color/bottom_nav_color"
+            android:textSize="18sp"
+            android:clickable="false"
+            android:focusable="false" />
+    </LinearLayout>
+
+    <!-- Bouton 2 : Classes (l'ensemble est cliquable) -->
+    <LinearLayout
+        android:id="@+id/nav_classes_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="32dp"
+        android:gravity="center_horizontal"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp">
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/person"
+            app:tint="@color/bottom_nav_color"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:focusable="false"
+            android:contentDescription="@string/classes" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/classes"
+            android:textColor="@color/bottom_nav_color"
+            android:textSize="18sp"
+            android:clickable="false"
+            android:focusable="false" />
+    </LinearLayout>
+
 </LinearLayout>

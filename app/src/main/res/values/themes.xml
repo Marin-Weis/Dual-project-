@@ -22,7 +22,7 @@
     <style name="DefaultTextStyle">
         <item name="android:textColor">@color/gris</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:fontFamily">@font/kanit</item>
+        <item name="android:fontFamily">@font/helvetica</item>
     </style>
 
     <style name="SubtitleTextStyle" parent="DefaultTextStyle">
@@ -33,4 +33,15 @@
         <item name="android:textSize">24sp</item>
     </style>
 
+    <!-- Style de la BottomNavigation -->
+    <style name="BottomNavigationStyle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/noir</item>
+        <item name="fontFamily">@font/helvetica</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- Style pour l'application entière -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="fontFamily">@font/helvetica</item>
+    </style>
 </resources>
