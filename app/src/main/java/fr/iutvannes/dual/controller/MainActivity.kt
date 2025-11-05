@@ -15,8 +15,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // 🔗 Lien entre le contrôleur (MainActivity) et la vue XML (activity_main.xml)
-        setContentView(R.layout.connexion_view)
+        // Lien entre le contrôleur (MainActivity) et la vue XML (activity_main.xml)
+        setContentView(R.layout.tableau_de_bord_view)
+
+//        // Lancer le fragment de connexion au démarrage
+//        showConnexionFragment()
+    }
 
 //        // 🧩 On récupère le bouton déclaré dans activity_main.xml
 //        val boutonConnexion = findViewById<Button>(R.id.boutonConnexion)
@@ -57,4 +61,11 @@ class MainActivity : AppCompatActivity() {
         }
         return bmp
     }
+    // Exemple d'utilisation pour la connexion à l'app
+//    private fun showConnexionFragment() {
+//        val fragment = ConnexionFragment()  // Fragment Vue
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.fragment_container, fragment)
+//            .commit()
+//    }
 }

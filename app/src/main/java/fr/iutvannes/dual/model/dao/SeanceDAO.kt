@@ -1,7 +1,7 @@
-package fr.iutvannes.dual.DAO
+package fr.iutvannes.dual.model.dao
 
 import androidx.room.*
-import fr.iutvannes.dual.Persistence.Seance
+import fr.iutvannes.dual.model.persistence.Seance
 
 @Dao
 interface SeanceDAO {
