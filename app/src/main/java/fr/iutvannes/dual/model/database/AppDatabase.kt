@@ -2,14 +2,14 @@ package fr.iutvannes.dual.model.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import fr.iutvannes.dual.Persistence.Eleve
-import fr.iutvannes.dual.Persistence.Prof
-import fr.iutvannes.dual.Persistence.Resultat
-import fr.iutvannes.dual.Persistence.Seance
-import fr.iutvannes.dual.DAO.EleveDAO
-import fr.iutvannes.dual.DAO.ProfDAO
-import fr.iutvannes.dual.DAO.ResultatDAO
-import fr.iutvannes.dual.DAO.SeanceDAO
+import fr.iutvannes.dual.model.persistence.Eleve
+import fr.iutvannes.dual.model.persistence.Prof
+import fr.iutvannes.dual.model.persistence.Resultat
+import fr.iutvannes.dual.model.persistence.Seance
+import fr.iutvannes.dual.model.dao.EleveDAO
+import fr.iutvannes.dual.model.dao.ProfDAO
+import fr.iutvannes.dual.model.dao.ResultatDAO
+import fr.iutvannes.dual.model.dao.SeanceDAO
 
 @Database(
     entities = [Eleve::class, Prof::class, Resultat::class, Seance::class],

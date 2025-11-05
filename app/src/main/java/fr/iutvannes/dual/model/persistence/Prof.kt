@@ -1,4 +1,4 @@
-package fr.iutvannes.dual.Persistence
+package fr.iutvannes.dual.model.persistence
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
