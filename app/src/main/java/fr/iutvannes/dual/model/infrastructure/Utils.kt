@@ -8,6 +8,7 @@ object Utils {
     /**
      * Renvoie l’adresse IP locale de la tablette
      * Retourne null si aucune connexion réseau active.
+     * Permet de construire ensuite l'url http://ip:8080/student/
      */
     fun getLocalIpAddress(): String? {
         try {
