@@ -6,7 +6,6 @@ import android.os.Bundle                  // Pour la gestion du cycle de vie
 import android.widget.Button               // Pour manipuler les boutons de la vue
 import androidx.appcompat.app.AppCompatActivity  // Classe de base pour les activités modernes (compatibilité)
 import fr.iutvannes.dual.infrastructure.server.KtorServer // serveur Ktor
-import fr.iutvannes.dual.infrastructure.Utils
 import com.google.zxing.BarcodeFormat // QR code
 import com.google.zxing.qrcode.QRCodeWriter // QR code
 
@@ -30,25 +29,9 @@ class MainActivity : AppCompatActivity() {
 //            val intent = Intent(this, ConnexionActivity::class.java)
 //            startActivity(intent)
 //        }
-
-        // BOUTON LANCER SEANCE
-         //bouton.setOnClickListener {
-         //   startSession()
-         //}
     }
 
-    private fun startSession() {
-        KtorServer.start(this) // lancement du serveur
 
-        val ip = Utils.getLocalIpAddress() ?: "localhost"
-        val url = "http://$ip:8080/student"
-
-        val qrBitmap = genererQRCode(url)
-
-        // affichage QR code
-        // qrCodeView.setImageBitmap(qrBitmap)
-        // textUrl.text = url
-    }
 
     private fun genererQRCode(text: String): Bitmap {
         val writer = QRCodeWriter()
