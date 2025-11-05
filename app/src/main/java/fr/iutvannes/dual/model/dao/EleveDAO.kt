@@ -1,7 +1,7 @@
-package fr.iutvannes.dual.DAO
+package fr.iutvannes.dual.model.dao
 
 import androidx.room.*
-import fr.iutvannes.dual.Persistence.Eleve
+import fr.iutvannes.dual.model.persistence.Eleve
 
 @Dao
 interface EleveDAO {
