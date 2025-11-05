@@ -86,6 +86,9 @@ dependencies {
     // --- LOGGING (Pour le débogage serveur) ---
     implementation("ch.qos.logback:logback-classic:1.4.14")
 
+    // --- Dépendance KTX pour les fragments ---
+    implementation("androidx.fragment:fragment-ktx:1.6.0")
+
     // --- RETIRÉ : Dépendances inutiles de Jetpack Compose ---
     // implementation(libs.androidx.lifecycle.runtime.ktx) // Souvent utilisé avec Compose, mais peut être gardé si besoin
     // implementation(libs.androidx.activity.compose)
