@@ -4,8 +4,8 @@ package fr.iutvannes.dual.controller.fragments
 import android.content.Context
 import androidx.room.*
 import fr.iutvannes.dual.model.database.AppDatabase
-import fr.iutvannes.dual.DAO.ProfDAO
-import fr.iutvannes.dual.Persistence.Prof
+import fr.iutvannes.dual.model.dao.ProfDAO
+import fr.iutvannes.dual.model.persistence.Prof
 
 class InscriptionFragment(context: Context) {
 

@@ -1,7 +1,7 @@
-package fr.iutvannes.dual.DAO
+package fr.iutvannes.dual.model.dao
 
 import androidx.room.*
-import fr.iutvannes.dual.Persistence.Prof
+import fr.iutvannes.dual.model.persistence.Prof
 
 @Dao
 interface ProfDAO {
@@ -17,6 +17,9 @@ interface ProfDAO {
 
     @Query("SELECT * FROM Prof WHERE id_prof = :idProf")
     suspend fun getProfById(idProf: Int): Prof?
+
+    @Query("SELECT * FROM Prof WHERE email = :email")
+    suspend fun getProfByEmail(email: String): Prof?
 
     @Update
     suspend fun update(prof: Prof): Int
