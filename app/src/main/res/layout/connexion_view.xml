@@ -112,11 +112,28 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp" />
 
+    <TextView
+        android:id="@+id/forgottenPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/connexion_page_forgottenpassword"
+        android:textSize="16sp"
+        android:textColor="@color/bleu"
+        android:fontFamily="@font/kanit_light"
+        android:textStyle="normal"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintTop_toBottomOf="@id/Trait"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="12dp"/>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/rememberMeContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/Trait"
+        app:layout_constraintTop_toBottomOf="@id/forgottenPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp">

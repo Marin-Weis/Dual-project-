@@ -32,6 +32,10 @@ class ConnexionFragment : Fragment() {
         val oeilIcon = view.findViewById<ImageView>(R.id.oeilIcon)
         val connexionButton = view.findViewById<Button>(R.id.connectionButton)
         val inscriptionLien = view.findViewById<TextView>(R.id.inscriptionLien)
+        val rememberMe = view.findViewById<CheckBox>(R.id.rememberMeCheckBox)
+        val forgottenPassword = view.findViewById<TextView>(R.id.forgottenPassword)
+
+
 
         val db = Room.databaseBuilder(
             requireContext(),
@@ -75,6 +79,18 @@ class ConnexionFragment : Fragment() {
         }
 
         inscriptionLien.setOnClickListener {
+            // TODO changement de fragment
+        }
+
+        rememberMe.setOnClickListener {
+            if (rememberMe.isChecked) {
+                // TODO enregistrer les infos
+            } else {
+                // TODO ne pas enregistrer les infos
+            }
+        }
+
+        forgottenPassword.setOnClickListener {
             // TODO changement de fragment
         }
 

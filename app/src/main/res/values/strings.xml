@@ -10,6 +10,7 @@
     <string name="connexion_page_title">Connexion</string>
     <string name="connexion_page_email_input">Adresse email :</string>
     <string name="connexion_page_password_input">Mot de passe :</string>
+    <string name="connexion_page_forgottenpassword">Mot de passe oublié ?</string>
     <string name="connexion_page_remember_me_button">Se souvenir de moi</string>
     <string name="connexion_page_button">Se connecter</string>
     <string name="connexion_page_sinscrire_button">Pas de compte ? S\'inscrire</string>
