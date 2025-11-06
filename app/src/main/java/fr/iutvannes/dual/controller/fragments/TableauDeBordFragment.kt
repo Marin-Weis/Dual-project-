@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 import fr.iutvannes.dual.MainActivity
@@ -28,12 +31,25 @@ class TableauDeBordFragment : Fragment(R.layout.fragment_tableau_de_bord) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Création du listener pour le bouton de séance
-        val boutonSeance = view.findViewById<Button>(R.id.boutonSeance)
-        boutonSeance.setOnClickListener {
-            // Lancement de la session via le ViewModel
-            // Le contexte de l'Activity est passé au ViewModel pour démarrer le serveur
+        val sessionBtn = view.findViewById<Button>(R.id.launchASession)
+        sessionBtn.setOnClickListener {
             sessionViewModel.startSession(requireContext())
+        }
+
+        val qrCode = view.findViewById<ImageView>(R.id.qrCodeView)
+        val sessionUrl = view.findViewById<TextView>(R.id.textUrl)
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            sessionViewModel.url.collect { url ->
+                if (url != null) {
+                    sessionUrl.text = url
+                    qrCode.setImageBitmap(genererQRCode(url))
+                }
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            sessionViewModel.running.collect { running ->
+                sessionBtn.isEnabled = !running // si le serveur tourne on désactive le btn
+            }
         }
     }
 
