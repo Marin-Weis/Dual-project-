@@ -1,4 +1,4 @@
-package fr.iutvannes.dual.controller.fragments
+package fr.iutvannes.dual.controller
 
 import android.os.Bundle
 import android.text.InputType
@@ -7,12 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.room.Room
 import fr.iutvannes.dual.R
 import fr.iutvannes.dual.model.database.AppDatabase
-import fr.iutvannes.dual.model.persistence.Prof
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -37,6 +36,9 @@ class ConnexionFragment : Fragment() {
         val rememberMe = view.findViewById<CheckBox>(R.id.rememberMeCheckBox)
         val forgottenPassword = view.findViewById<TextView>(R.id.forgottenPassword)
 
+        val sharedPref = requireContext().getSharedPreferences("loginPrefs", 0)
+        val editor = sharedPref.edit()
+
         val db = Room.databaseBuilder(
             requireContext(),
             AppDatabase::class.java,
@@ -44,23 +46,16 @@ class ConnexionFragment : Fragment() {
         ).build()
         val dao = db.profDAO()
 
-        // ⚠️ Ajout temporaire d’un professeur de test si la table est vide
-        lifecycleScope.launch(Dispatchers.IO) {
-            val existing = dao.getAll()
-            if (existing.isEmpty()) {
-                dao.insert(
-                    Prof(
-                        nom = "Dupont",
-                        prenom = "Jean",
-                        email = "test@test.com",
-                        password = "1234"
-                    )
-                )
-                println("👤 Prof de test ajouté : test@test.com / 1234")
-            }
+        val savedEmail = sharedPref.getString("email", "")
+        val savedPassword = sharedPref.getString("password", "")
+        val isRemembered = sharedPref.getBoolean("rememberMe", false)
+
+        if (isRemembered) {
+            emailInput.setText(savedEmail)
+            passwordInput.setText(savedPassword)
+            rememberMe.isChecked = true
         }
 
-        // 👁️ Gérer l'affichage du mot de passe
         oeilIcon.setOnClickListener {
             passwordVisible = !passwordVisible
             passwordInput.inputType = if (passwordVisible)
@@ -70,7 +65,6 @@ class ConnexionFragment : Fragment() {
             passwordInput.setSelection(passwordInput.text.length)
         }
 
-        // 🔐 Connexion
         connexionButton.setOnClickListener {
             val email = emailInput.text.toString().trim()
             val password = passwordInput.text.toString().trim()
@@ -80,44 +74,38 @@ class ConnexionFragment : Fragment() {
             } else if (password.isEmpty()) {
                 Toast.makeText(requireContext(), "Veuillez entrer votre mot de passe", Toast.LENGTH_SHORT).show()
             } else {
+                // On lance une coroutine pour accéder à la DB
                 lifecycleScope.launch {
-                    val prof = withContext(Dispatchers.IO) {
+                    val prof = withContext(Dispatchers.IO) { // Dispatchers.IO pour le thread de la DB
                         dao.getProfByEmail(email)
                     }
 
                     if (prof == null) {
                         Toast.makeText(requireContext(), "Cet email n'est pas enregistré", Toast.LENGTH_SHORT).show()
-                    } else if (prof.password != password) {
-                        Toast.makeText(requireContext(), "Mot de passe incorrect", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(requireContext(), "Connexion réussie ✅", Toast.LENGTH_SHORT).show()
-                        // ✅ Navigation vers le tableau de bord
-                        findNavController().navigate(R.id.action_connexionFragment_to_dashboardFragment)
+                        Toast.makeText(requireContext(), "Connexion réussie !", Toast.LENGTH_SHORT).show()
+                        if (rememberMe.isChecked) {
+                            editor.putString("email", emailInput.text.toString())
+                            editor.putString("password", passwordInput.text.toString()) // TODO hash password
+                            editor.putBoolean("rememberMe", true)
+                            editor.apply()
+                        } else {
+                            editor.clear()
+                            editor.apply()
+                        }
+                        findNavController().navigate(R.id.action_connexionFragment_to_tableauDeBordFragment)
                     }
                 }
             }
         }
 
-        // 🧭 Aller vers l'inscription
         inscriptionLien.setOnClickListener {
             findNavController().navigate(R.id.action_connexionFragment_to_inscriptionFragment)
         }
 
-        // 💾 Se souvenir de moi
-        rememberMe.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                Toast.makeText(requireContext(), "Connexion automatique activée", Toast.LENGTH_SHORT).show()
-                // TODO: sauvegarder l'email et le mot de passe avec SharedPreferences
-            } else {
-                Toast.makeText(requireContext(), "Connexion automatique désactivée", Toast.LENGTH_SHORT).show()
-                // TODO: effacer les infos enregistrées
-            }
+        forgottenPassword.setOnClickListener {
+            // TODO changement de fragment
         }
-
-//        // ❓ Mot de passe oublié
-//        forgottenPassword.setOnClickListener {
-//            findNavController().navigate(R.id.action_connexionFragment_to_forgottenPasswordFragment)
-//        }
 
         return view
     }

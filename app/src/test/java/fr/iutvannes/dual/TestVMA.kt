@@ -44,11 +44,11 @@ class TestVMA {
      */
     private fun testCasCalculer(v: VMA?, distance: Double, temps: Double, attendu: Double, casErr: Boolean) {
         try {
-            val res = v?.calculer(distance, temps)
+            val res = v!!.calculer(distance, temps)
             if (casErr) {
                 println("Échec du test (aucune exception alors qu’attendue)")
             } else {
-                if (res != null && kotlin.math.abs(res - attendu) < 0.001) {
+                if (kotlin.math.abs(res - attendu) < 0.001) {
                     println("Test réussi : $res km/h")
                 } else {
                     println("Échec du test : résultat obtenu = $res, attendu = $attendu")

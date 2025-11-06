@@ -4,31 +4,38 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/connexionFragment">
 
-    <!-- Connexion -->
+    <!-- Page de connexion -->
     <fragment
         android:id="@+id/connexionFragment"
-        android:name="fr.iutvannes.dual.controller.fragments.ConnexionFragment"
+        android:name="fr.iutvannes.dual.controller.ConnexionFragment"
         android:label="Connexion">
 
+        <!-- Action vers la page d'inscription -->
         <action
             android:id="@+id/action_connexionFragment_to_inscriptionFragment"
             app:destination="@id/inscriptionFragment" />
-
-        <action
-            android:id="@+id/action_connexionFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
     </fragment>
 
-    <!-- Inscription -->
+    <fragment
+        android:id="@+id/tableauDeBordFragment"
+        android:name="fr.iutvannes.dual.controller.fragments.TableauDeBordFragment"
+        android:label="Tableau de bord">
+
+        <!-- Action vers la page du tableaud de bord -->
+        <action
+            android:id="@+id/action_connexionFragment_to_tableauDeBordFragment"
+            app:destination="@id/tableauDeBordFragment" />
+    </fragment>
+
+    <!-- Page d'inscription -->
     <fragment
         android:id="@+id/inscriptionFragment"
-        android:name="fr.iutvannes.dual.controller.fragments.InscriptionFragment"
-        android:label="Inscription" />
+        android:name="fr.iutvannes.dual.controller.InscriptionFragment"
+        android:label="Inscription">
 
-    <!-- Tableau de bord -->
-    <fragment
-        android:id="@+id/dashboardFragment"
-        android:name="fr.iutvannes.dual.controller.fragments.TableauDeBordFragment"
-        android:label="Tableau de bord" />
-
+        <!-- Action vers la page de connexion -->
+        <action
+            android:id="@+id/action_inscriptionFragment_to_connexionFragment"
+            app:destination="@id/connexionFragment" />
+    </fragment>
 </navigation>
