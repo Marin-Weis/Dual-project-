@@ -4,27 +4,31 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/connexionFragment">
 
-    <!-- Page de connexion -->
+    <!-- Connexion -->
     <fragment
         android:id="@+id/connexionFragment"
-        android:name="fr.iutvannes.dual.controller.ConnexionFragment"
+        android:name="fr.iutvannes.dual.controller.fragments.ConnexionFragment"
         android:label="Connexion">
 
-        <!-- Action vers la page d'inscription -->
         <action
             android:id="@+id/action_connexionFragment_to_inscriptionFragment"
             app:destination="@id/inscriptionFragment" />
+
+        <action
+            android:id="@+id/action_connexionFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
     </fragment>
 
-    <!-- Page d'inscription -->
+    <!-- Inscription -->
     <fragment
         android:id="@+id/inscriptionFragment"
-        android:name="fr.iutvannes.dual.controller.InscriptionFragment"
-        android:label="Inscription">
+        android:name="fr.iutvannes.dual.controller.fragments.InscriptionFragment"
+        android:label="Inscription" />
 
-        <!-- Action vers la page de connexion -->
-        <action
-            android:id="@+id/action_inscriptionFragment_to_connexionFragment"
-            app:destination="@id/connexionFragment" />
-    </fragment>
+    <!-- Tableau de bord -->
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="fr.iutvannes.dual.controller.fragments.TableauDeBordFragment"
+        android:label="Tableau de bord" />
+
 </navigation>

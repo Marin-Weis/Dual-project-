@@ -1,4 +1,4 @@
-//package fr.iutvannes.dual.controller
+package fr.iutvannes.dual.controller.fragments
 //
 //import android.os.Bundle
 //import android.text.InputType
@@ -6,7 +6,7 @@
 //import android.view.View
 //import android.view.ViewGroup
 //import android.widget.*
-//import androidx.fragment.app.Fragment
+import androidx.fragment.app.Fragment
 //import androidx.lifecycle.lifecycleScope
 //import androidx.room.Room
 //import androidx.navigation.fragment.findNavController
@@ -17,7 +17,7 @@
 //import kotlinx.coroutines.launch
 //import kotlinx.coroutines.withContext
 //
-//class InscriptionFragment : Fragment() {
+class InscriptionFragment : Fragment() {
 //
 //    private var passwordVisible = false
 //    private var passwordVerifVisible = false
@@ -119,4 +119,4 @@
 //
 //        return view
 //    }
-//}
+}
