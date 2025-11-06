@@ -13,7 +13,8 @@ import androidx.fragment.app.Fragment
 import fr.iutvannes.dual.R
 import fr.iutvannes.dual.controller.fragments.ConnexionFragment
 import fr.iutvannes.dual.controller.fragments.ClassesFragment
-import fr.iutvannes.dual.controller.fragments.ProfilFragment // Assurez-vous d'importer vos fragments
+import fr.iutvannes.dual.controller.fragments.InscriptionFragment
+import fr.iutvannes.dual.controller.fragments.ProfilFragment
 import fr.iutvannes.dual.controller.fragments.TableauDeBordFragment
 
 class MainActivity : AppCompatActivity() {
@@ -67,7 +68,7 @@ class MainActivity : AppCompatActivity() {
 
         // --- ÉTAT INITIAL ---
         if (savedInstanceState == null) {
-            showFragment(TableauDeBordFragment()) // On commence sur le tableau de bord
+            showFragment(InscriptionFragment()) // On commence sur le tableau de bord
         }
 
     }
@@ -97,6 +98,11 @@ class MainActivity : AppCompatActivity() {
             }
 
             is ConnexionFragment -> {
+                topBarContainer.visibility = View.GONE
+                navBarContainer.visibility = View.GONE
+            }
+
+            is InscriptionFragment -> {
                 topBarContainer.visibility = View.GONE
                 navBarContainer.visibility = View.GONE
             }

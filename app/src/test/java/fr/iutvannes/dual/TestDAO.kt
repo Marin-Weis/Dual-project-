@@ -28,7 +28,6 @@ class TestDAO {
             .build()
     }
 
-
     @After
     fun closeDb() {
         db.close()
@@ -40,9 +39,9 @@ class TestDAO {
         val eleve = Eleve(nom = "Dupont", prenom = "Jean", data_naissance = "2004-06-14", password = "Password1.")
         val id = db.EleveDao().insert(eleve).toInt()
 
-        val fetched = db.EleveDao().getEleveById(id)
-        assertNotNull(fetched)
-        assertEquals("Dupont", fetched?.nom)
+        val resultat = db.EleveDao().getEleveById(id)
+        assertNotNull(resultat)
+        assertEquals("Dupont", resultat?.nom)
     }
 
     @Test
@@ -53,9 +52,9 @@ class TestDAO {
         val updated = eleve.copy(id_eleve = id, nom = "Durand-Modifié")
         val rows = db.EleveDao().update(updated)
 
-        val fetched = db.EleveDao().getEleveById(id)
+        val resultat = db.EleveDao().getEleveById(id)
         assertEquals(1, rows)
-        assertEquals("Durand-Modifié", fetched?.nom)
+        assertEquals("Durand-Modifié", resultat?.nom)
     }
 
     @Test
@@ -66,8 +65,8 @@ class TestDAO {
         val rowsDeleted = db.EleveDao().delete(id)
         assertEquals(1, rowsDeleted)
 
-        val fetched = db.EleveDao().getEleveById(id)
-        assertNull(fetched)
+        val resultat = db.EleveDao().getEleveById(id)
+        assertNull(resultat)
     }
 
     // Test prof
@@ -76,9 +75,9 @@ class TestDAO {
         val prof = Prof(nom = "Tibermacine", prenom = "Chouki", email = "chouki.tibermacine@iutvannes.fr", password = "Password1.")
         val id = db.profDAO().insert(prof).toInt()
 
-        val fetched = db.profDAO().getProfByEmail("chouki.tibermacine@iutvannes.fr")
-        assertNotNull(fetched)
-        assertEquals("Chouki", fetched?.prenom)
+        val resultat = db.profDAO().getProfByEmail("chouki.tibermacine@iutvannes.fr")
+        assertNotNull(resultat)
+        assertEquals("Chouki", resultat?.prenom)
     }
 
     // Test seance
@@ -91,9 +90,9 @@ class TestDAO {
         val seance = Seance(date = "2025-11-06", nb_tours = 3, nb_cibles = 5, id_prof = profId.toString())
         val id = db.seanceDao().insert(seance).toInt()
 
-        val fetched = db.seanceDao().getSeanceById(id)
-        assertNotNull(fetched)
-        assertEquals(3, fetched?.nb_tours)
+        val resultat = db.seanceDao().getSeanceById(id)
+        assertNotNull(resultat)
+        assertEquals(3, resultat?.nb_tours)
     }
 
     // Test resultat
@@ -106,8 +105,8 @@ class TestDAO {
         val resultat = Resultat(id_eleve = eleveId, id_seance = seanceId, temp_course = 25.3F, cibles_touchees = 4, note_finale = 15.5F)
         val id = db.resultatDao().insert(resultat).toInt()
 
-        val fetched = db.resultatDao().getResultatById(id)
-        assertNotNull(fetched)
-        assertEquals(4, fetched?.cibles_touchees)
+        val res = db.resultatDao().getResultatById(id)
+        assertNotNull(resultat)
+        assertEquals(4, res?.cibles_touchees)
     }
 }

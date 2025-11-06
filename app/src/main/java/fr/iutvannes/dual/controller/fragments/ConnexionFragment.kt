@@ -1,6 +1,5 @@
 package fr.iutvannes.dual.controller.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
@@ -13,7 +12,6 @@ import fr.iutvannes.dual.R
 import fr.iutvannes.dual.model.database.AppDatabase
 import androidx.lifecycle.lifecycleScope
 import fr.iutvannes.dual.controller.MainActivity
-import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -95,18 +93,14 @@ class ConnexionFragment : Fragment() {
                             editor.clear()
                             editor.apply()
                         }
-                        // Navigation vers MainActivity
-                        // Intent permet de passer d'une activité à une autre avec le contexte et la classe de l'activité cible
-                        val intent = Intent(requireContext(), MainActivity::class.java)
-                        startActivity(intent) // Démarre l'activité principale
-                        requireActivity().finish() // Ferme l'activité de connexion pour éviter de revenir en arrière
+                        (activity as? MainActivity)?.showFragment(TableauDeBordFragment())
                     }
                 }
             }
         }
 
         inscriptionLien.setOnClickListener {
-            //TODO changement de fragment
+            (activity as? MainActivity)?.showFragment(InscriptionFragment())
         }
 
         forgottenPassword.setOnClickListener {
