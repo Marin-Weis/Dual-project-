@@ -1,5 +1,6 @@
-package fr.iutvannes.dual.controller.fragments
+package fr.iutvannes.dual.controller
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.room.Room
 import fr.iutvannes.dual.R
 import fr.iutvannes.dual.model.database.AppDatabase
 import androidx.lifecycle.lifecycleScope
+import fr.iutvannes.dual.MainActivity
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -84,6 +86,21 @@ class ConnexionFragment : Fragment() {
                         Toast.makeText(requireContext(), "Cet email n'est pas enregistré", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(requireContext(), "Connexion réussie !", Toast.LENGTH_SHORT).show()
+                        // Navigation vers MainActivity
+                        // Intent permet de passer d'une activité à une autre avec le contexte et la classe de l'activité cible
+                        val intent = Intent(requireContext(), MainActivity::class.java)
+                        startActivity(intent) // Démarre l'activité principale
+                        requireActivity().finish() // Ferme l'activité de connexion pour éviter de revenir en arrière
+                    }
+                }
+            }
+        }
+
+        rememberMe.setOnClickListener {
+            if (rememberMe.isChecked) {
+                // TODO enregistrer les infos
+            } else {
+                // TODO ne pas enregistrer les infos
                         if (rememberMe.isChecked) {
                             editor.putString("email", emailInput.text.toString())
                             editor.putString("password", passwordInput.text.toString()) // TODO hash password
