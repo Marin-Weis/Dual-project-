@@ -4,10 +4,9 @@ package fr.iutvannes.dual.controller.fragments
 // Imports nécessaires
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
-import fr.iutvannes.dual.MainActivity
+import fr.iutvannes.dual.controller.MainActivity
 import fr.iutvannes.dual.R
 
 /**
